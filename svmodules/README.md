@@ -1,38 +1,63 @@
-# sv
+# Terraform Module Provider
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A flexible Terraform module provider written in TypeScript that supports multiple storage backends for module distribution.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Multiple storage backend support (Azure Blob Storage, Cloudflare R2, Local filesystem)
+- Module versioning
+- Namespace organization
+- RESTful API for module management
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Getting Started
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+git clone <repository-url>
+pnpm install
 ```
 
-## Building
-
-To create a production version of your app:
+2. Configure your environment variables:
 
 ```bash
-npm run build
+cp .env.example .env
+# Edit .env with your storage backend credentials
 ```
 
-You can preview the production build with `npm run preview`.
+3. Start the development server:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+pnpm dev
+```
+
+## API Endpoints
+
+- `GET /api/:namespace/:name/:version` - Retrieve a specific module version
+- `GET /api/:namespace/:name` - List all versions of a module
+- `POST /api/:namespace/:name` - Upload a new module version
+
+## Storage Backends
+
+Currently supported storage backends:
+
+- Cloudflare R2
+- Amazon S3
+- Local filesystem
+
+## Development
+
+```bash
+# Run tests
+pnpm test
+
+# Build for production
+pnpm build
+
+# Start production server
+pnpm start
+```
+
+## License
+
+MIT
